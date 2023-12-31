@@ -34,7 +34,6 @@
 
 .rest-card{
     width: 200px;
-    height: 300px;
     padding: 5px;
     margin: 5px;
 }
@@ -47,4 +46,5 @@
 
 .rest-logo {
     width: 195px;
+    height: 150px;
 }
