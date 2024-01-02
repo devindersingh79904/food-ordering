@@ -14,23 +14,25 @@ const Body = () => {
     setListOfRestaurants([...restaurantsArray]);
   };
   return (
-    <div className="body">
-      <div className="search">
-        <input type="text" placeholder="Search for restaurants" />
-        <button>Search</button>
-        <button className="filter-btn" onClick={onButtonClick}>
-          Top Rated Restaurants
-        </button>
-        <button className="filter-btn" onClick={onGetAll}>
-          GetAll Restaurants
-        </button>
+    <>
+      <div className="body">
+        <div className="search">
+          <input type="text" placeholder="Search for restaurants" />
+          <button>Search</button>
+          <button className="filter-btn" onClick={onButtonClick}>
+            Top Rated Restaurants
+          </button>
+          <button className="filter-btn" onClick={onGetAll}>
+            GetAll Restaurants
+          </button>
+        </div>
+        <div className="rest-container">
+          {listOfRestaurants.map((restData) => (
+            <RestaurantCard key={restData?.info?.id} restData={restData} />
+          ))}
+        </div>
       </div>
-      <div className="rest-container">
-        {listOfRestaurants.map((restData) => (
-          <RestaurantCard key={restData?.info?.id} restData={restData} />
-        ))}
-      </div>
-    </div>
+    </>
   );
 };
 
