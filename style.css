@@ -35,6 +35,11 @@
     flex-wrap: wrap;
   
 }
+.rest-container > a{
+    text-decoration: none;
+    color: black;
+}
+
 
 .rest-card{
     width: 200px;
