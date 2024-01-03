@@ -81,3 +81,22 @@
     padding:5px 20px;
 }
 
+
+.restaurant-menu-container > ul > li {
+    list-style: none;
+    margin: 10px 20px;
+    border: 1px solid black;
+
+}
+
+.restaurantMenuItem-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.restaurant-menu-img{
+    width: 100px;
+    height: 100px;
+    margin:30px 40px;
+}
