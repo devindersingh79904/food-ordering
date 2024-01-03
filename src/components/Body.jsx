@@ -2,46 +2,52 @@ import { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import { restaurantsArray } from "../utils/mockData";
 import Shimmer from "./Shimmer";
+import {SWIGGY_API_URL} from "../utils/constants";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
+  const [filteredRestaurants,setFilteredRestaurants] = useState([]); // [
   const [searchtext, setSearchtext] = useState("");
   useEffect(() => {
-    console.log("i am in useeffect ");
     fetchData();
   }, []);
 
   const fetchData = async () => {
     try {
-      setTimeout(() => {
-        setListOfRestaurants(restaurantsArray);
-      }, 1000);
+      // setTimeout(() => {
+      //   setListOfRestaurants(restaurantsArray);
+      // }, 1000);
+      
+      const data = await fetch(SWIGGY_API_URL);
+      const dataJson = await data.json();
+      //console.log(dataJson?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+      const allRestaurants = dataJson?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+      // console.log(allRestaurants);
+      setListOfRestaurants(allRestaurants);
+      setFilteredRestaurants(allRestaurants);
     } catch (err) {
       console.log(err);
     }
   };
   const onButtonClick = () => {
-    setListOfRestaurants(
-      listOfRestaurants.filter((rest) => rest.info.avgRating >= 4.1)
+    setFilteredRestaurants(
+      listOfRestaurants.filter((rest) => rest.info.avgRating >= 4.5)
     );
   };
   const onGetAll = () => {
-    setListOfRestaurants([...restaurantsArray]);
+    setFilteredRestaurants(listOfRestaurants);
   };
 
   const searchBtnClick = () => {
-    console.log(searchtext);
-    console.log("search",searchtext)
     const searchedRest = listOfRestaurants.filter((rest) =>
       rest.info.name.toLowerCase().includes(searchtext)
     );
-    console.log(searchedRest);
-    setListOfRestaurants(
+    setFilteredRestaurants(
       searchedRest
     );
   }
 
-  if (listOfRestaurants.length === 0) {
+  if (filteredRestaurants.length === 0) {
     return <Shimmer />;
   }
   return (
@@ -67,7 +73,7 @@ const Body = () => {
           </button>
         </div>
         <div className="rest-container">
-          {listOfRestaurants?.map((restData) => (
+          {filteredRestaurants?.map((restData) => (
             <RestaurantCard key={restData?.info?.id} restData={restData} />
           ))}
         </div>

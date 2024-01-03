@@ -2,11 +2,9 @@ import { useEffect, useState } from "react";
 import { LOGO_URL } from "../utils/constants";
 const Header = () => {
   const [isLogin, setIsLogin] = useState(false);
-  console.log("render");
   onBtnClick = () => {
     setIsLogin(!isLogin);
    // isLogin = !isLogin;
-    console.log(isLogin);
   }
 
   return (
@@ -15,7 +13,6 @@ const Header = () => {
         <img className="logo" src={LOGO_URL} />
       </div>
       <div className="nav-items">
-        {console.log("render nav-items")}
         <ul>
           <li>Home</li>
           <li>About Us</li>
